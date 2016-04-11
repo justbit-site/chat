@@ -1,0 +1,39 @@
+<template name="Chat">
+    <div class="container-fluid chat-wrapper">
+        <div class="row messages">
+            {{#if isReady}}
+                {{#each messages}}
+                    {{> Message}}
+                {{/each}}
+            {{else}}
+            <div class="loading">
+                <div class="loader-inner ball-scale-ripple-multiple"><div></div><div></div><div></div></div>
+            </div>
+            {{/if}}
+        </div>
+        {{#if currentUser}}
+        <div class="row new-message">
+            <form>
+                <input type="text" name="message" />
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+        {{/if}}
+        {{#unless currentUser}}
+        <div class="row new-message">
+            <div class="login"><i class="icon ion-social-twitter"></i>&nbsp; Logueate para chatear</div>
+        </div>
+        {{/unless}}
+    </div>
+</template>
+
+
+<template name="Message">
+    <div class="msg-wrapper {{#if belongsToMe this}}mine{{/if}}">
+        <div class="message">
+            {{#if belongsToOther this}}<span class="username">@{{user.services.twitter.screenName}}: </span>{{/if}}
+            {{message}}
+        </div>
+        <span class="timestamp">{{getTime this}}</span>
+    </div>
+</template>
