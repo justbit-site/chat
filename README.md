@@ -1,4 +1,4 @@
-### Chat hecho en Meteor 1.3
+### Chat hecho en Meteor 1.4.2.3
 
 Prueba de concepto de cómo armar un chat básico con Meteor con soporte de usuarios.
 
