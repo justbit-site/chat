@@ -27,3 +27,31 @@ Template.Chat.helpers({
         return messages.ready();
     }
 });
+
+Messages.find().observe({
+  changed: function(message) {
+    notification(message.message);
+  }
+});
+
+// Functions
+function notification( message ) {
+  if (Notification) {
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission()
+    }
+    var title = "JustBit.site"
+    var extra = {
+      icon: "/images/logo.png",
+      body: message
+    }
+    var noti = new Notification( title, extra)
+    noti.onclick = {
+      window.open('http://www.mozilla.org', '_blank');
+    }
+    noti.onclose = {
+      // Al cerrar
+    }
+    setTimeout( function() { noti.close() }, 10000)
+  }
+}
